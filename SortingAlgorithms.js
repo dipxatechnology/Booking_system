@@ -1,82 +1,161 @@
-export default class SortingAlgorithms {
-  // Selection Sort
-  static selectionSort(items, compareFn) {
-    const sortedItems = [...items];
-    const n = sortedItems.length;
-    for (let i = 0; i < n - 1; i++) {
-      let smallestIndex = i;
-      for (let j = i + 1; j < n; j++) {
-        if (compareFn(sortedItems[j], sortedItems[smallestIndex]) < 0) {
-          smallestIndex = j;
-        }
-      }
-      const temp = sortedItems[i];
-      sortedItems[i] = sortedItems[smallestIndex];
-      sortedItems[smallestIndex] = temp;
-    }
-    return sortedItems;
+// * Sorting Algorithms
+
+// Selection Sort
+export function selectionSort(list) {
+  if (!list.head) {
+    return new HotelBookingSystem();
   }
 
-  // Insertion Sort
-  static insertionSort(items, compareFn) {
-    const sortedItems = [...items];
-    const n = sortedItems.length;
-    for (let i = 1; i < n; i++) {
-      const key = sortedItems[i];
-      let j = i - 1;
-      while (j >= 0 && compareFn(sortedItems[j], key) > 0) {
-        sortedItems[j + 1] = sortedItems[j];
-        j--;
+  const sortedList = new HotelBookingSystem();
+  let current = list.head;
+
+  while (current) {
+    let min = current;
+    let nextNode = current.next;
+
+    while (nextNode) {
+      if (nextNode.data.checkInDate < min.data.checkInDate) {
+        min = nextNode;
       }
-      sortedItems[j + 1] = key;
+      nextNode = nextNode.next;
     }
-    return sortedItems;
+
+    sortedList.insertBooking(min.data);
+
+    current = current.next;
   }
 
-  // Bubble Sort
-  static bubbleSort(items, compareFn) {
-    const sortedItems = [...items];
-    const n = sortedItems.length;
-    for (let i = 0; i < n - 1; i++) {
-      for (let j = 0; j < n - i - 1; j++) {
-        if (compareFn(sortedItems[j], sortedItems[j + 1]) > 0) {
-          const temp = sortedItems[j];
-          sortedItems[j] = sortedItems[j + 1];
-          sortedItems[j + 1] = temp;
-        }
-      }
-    }
-    return sortedItems;
+  return sortedList;
+}
+
+// Insertion Sort
+export function insertionSort(list) {
+  if (!list.head) {
+    return new HotelBookingSystem();
   }
 
-  // Merge Sort
-  static mergeSort(items, compareFn) {
-    if (items.length <= 1) {
-      return items;
+  const sortedList = new HotelBookingSystem();
+  let current = list.head;
+
+  while (current) {
+    let nextNode = current.next;
+
+    if (
+      !sortedList.head ||
+      sortedList.head.data.checkInDate >= current.data.checkInDate
+    ) {
+      current.next = sortedList.head;
+      sortedList.head = current;
+    } else {
+      let temp = sortedList.head;
+
+      while (
+        temp.next &&
+        temp.next.data.checkInDate < current.data.checkInDate
+      ) {
+        temp = temp.next;
+      }
+
+      current.next = temp.next;
+      temp.next = current;
     }
-    const mid = Math.floor(items.length / 2);
-    const left = items.slice(0, mid);
-    const right = items.slice(mid);
-    return SortingAlgorithms.merge(
-      SortingAlgorithms.mergeSort(left, compareFn),
-      SortingAlgorithms.mergeSort(right, compareFn),
-      compareFn
-    );
+
+    current = nextNode;
   }
 
-  static merge(left, right, compareFn) {
-    let result = [];
-    let leftIndex = 0;
-    let rightIndex = 0;
-    while (leftIndex < left.length && rightIndex < right.length) {
-      if (compareFn(left[leftIndex], right[rightIndex]) <= 0) {
-        result.push(left[leftIndex]);
-        leftIndex++;
-      } else {
-        result.push(right[rightIndex]);
-        rightIndex++;
-      }
-    }
-    return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+  return sortedList;
+}
+
+// Bubble Sort
+export function bubbleSort(list) {
+  if (!list.head) {
+    return new HotelBookingSystem();
   }
+
+  const sortedList = new HotelBookingSystem();
+  let current = list.head;
+
+  while (current) {
+    sortedList.insertBooking(current.data);
+    current = current.next;
+  }
+
+  let swapped = true;
+
+  while (swapped) {
+    swapped = false;
+    current = sortedList.head;
+
+    while (current.next) {
+      if (current.data.checkInDate > current.next.data.checkInDate) {
+        let temp = current.data;
+        current.data = current.next.data;
+        current.next.data = temp;
+        swapped = true;
+      }
+
+      current = current.next;
+    }
+  }
+
+  return sortedList;
+}
+
+// Merge Sort
+export function mergeSort(list) {
+  if (!list.head || !list.head.next) {
+    return list;
+  }
+
+  const mid = getMiddle(list.head);
+  const leftHead = list.head;
+  const rightHead = mid.next;
+  mid.next = null;
+
+  const sortedLeft = mergeSort(new HotelBookingSystem());
+  sortedLeft.head = leftHead;
+  const sortedRight = mergeSort(new HotelBookingSystem());
+  sortedRight.head = rightHead;
+
+  return merge(sortedLeft, sortedRight);
+}
+
+function getMiddle(head) {
+  let slow = head;
+  let fast = head;
+
+  while (fast.next && fast.next.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+
+  return slow;
+}
+
+function merge(left, right) {
+  const dummyNode = new Node(null);
+  let current = dummyNode;
+
+  let leftPtr = left.head;
+  let rightPtr = right.head;
+
+  while (leftPtr && rightPtr) {
+    if (leftPtr.data.checkInDate <= rightPtr.data.checkInDate) {
+      current.next = leftPtr;
+      leftPtr = leftPtr.next;
+    } else {
+      current.next = rightPtr;
+      rightPtr = rightPtr.next;
+    }
+
+    current = current.next;
+  }
+
+  if (leftPtr) {
+    current.next = leftPtr;
+  } else if (rightPtr) {
+    current.next = rightPtr;
+  }
+
+  return new HotelBookingSystem(dummyNode.next);
 }
