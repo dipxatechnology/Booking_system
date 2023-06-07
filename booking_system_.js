@@ -200,33 +200,45 @@ class BookingSystemUtils {
 // Example usage:
 const hotelBookings = new HotelBookingSystem();
 hotelBookings.insertBooking({
+  bookingId: 10,
+  checkInDate: "2023-06-10",
+  name: "Michael Johnson",
+  phoneNumber: "4567891230",
+});
+hotelBookings.insertBooking({
   bookingId: 1,
   checkInDate: "2023-06-01",
   name: "John Doe",
   phoneNumber: "1234567890",
 });
 hotelBookings.insertBooking({
-  bookingId: 2,
+  bookingId: 3,
   checkInDate: "2023-06-05",
   name: "Jane Smith",
   phoneNumber: "0987654321",
 });
 hotelBookings.insertBooking({
-  bookingId: 3,
+  bookingId: 2,
   checkInDate: "2023-06-03",
   name: "Alice Johnson",
   phoneNumber: "5555555555",
 });
+
+function linkedListToArray(linkedList) {
+  const array = [];
+  let current = linkedList.head;
+
+  while (current) {
+    array.push(current.data);
+    current = current.next;
+  }
+
+  return array;
+}
+
 console.log(hotelBookings.length()); // Output: 3
-const sortedBookings = BookingSystemUtils.insertionSort(hotelBookings);
-console.log(sortedBookings.head); // Output: CustomNode { data: { bookingId: 1, checkInDate: '2023-06-01', name: 'John Doe', phoneNumber: '1234567890' }, next: CustomNode { data: { bookingId: 3, checkInDate: '2023-06-03', name: 'Alice Johnson', phoneNumber: '5555555555' }, next: CustomNode { data: { bookingId: 2, checkInDate: '2023-06-05', name: 'Jane Smith', phoneNumber: '0987654321' }, next: null } } }
-console.log("LINEAR SEARCH");
-const foundBooking = BookingSystemUtils.linearSearch(sortedBookings, 2);
-console.log(foundBooking); // Output: { bookingId: 3, checkInDate: '2023-06-03', name: 'Alice Johnson', phoneNumber: '5555555555' }
-console.log("BINARY SEARCH ");
-const booking_ID = 2;
-const binaryFoundBooking = BookingSystemUtils.binarySearch(
-  sortedBookings,
-  booking_ID
-);
-console.log(binaryFoundBooking); // Output: { bookingId: 2, checkInDate: '2023-06-05', name: 'Jane Smith', phoneNumber: '0987654321' }
+const makeArray = linkedListToArray(hotelBookings);
+console.log("NOT SORTED ", makeArray);
+const sortedBookings = BookingSystemUtils.bubbleSort(hotelBookings);
+const sortedArray = linkedListToArray(sortedBookings);
+console.log("SORTED ", sortedArray);
