@@ -1,26 +1,35 @@
 import { CustomNode, HotelBookingSystem } from "./HotelBookingSystem.js";
 
 export default class BookingSystemUtils {
+  // ! selectionSort
   static selectionSort(list) {
-    if (!list.head) {
-      return new HotelBookingSystem();
+    const length = list.length();
+    if (length <= 1) {
+      return list; // Nothing to sort, return the original list
     }
-    const sortedList = new HotelBookingSystem();
     let current = list.head;
-    while (current) {
-      let min = current;
+    while (current !== null) {
+      let minNode = current;
       let nextNode = current.next;
-      while (nextNode) {
-        if (nextNode.data.checkInDate < min.data.checkInDate) {
-          min = nextNode;
+      while (nextNode !== null) {
+        if (nextNode.data.bookingId < minNode.data.bookingId) {
+          minNode = nextNode;
         }
         nextNode = nextNode.next;
       }
-      sortedList.insertBooking(min.data);
+      // Swap the data of 'current' and 'minNode'
+      if (current !== minNode) {
+        const temp = current.data;
+        current.data = minNode.data;
+        minNode.data = temp;
+      }
       current = current.next;
     }
-    return sortedList;
+    return list; // Return the sorted linked list
   }
+
+  // ! insertionSort
+
   static insertionSort(list) {
     if (!list.head) {
       return new HotelBookingSystem();
@@ -50,6 +59,9 @@ export default class BookingSystemUtils {
     }
     return sortedList;
   }
+
+  // ! bubbleSort
+
   static bubbleSort(list) {
     if (!list.head) {
       return new HotelBookingSystem();
@@ -76,6 +88,8 @@ export default class BookingSystemUtils {
     }
     return sortedList;
   }
+  // ! mergeSort
+
   static mergeSort(list) {
     if (!list.head || !list.head.next) {
       return list;
@@ -123,6 +137,7 @@ export default class BookingSystemUtils {
     mergedList.head = dummyNode.next; // Set the head of the merged list
     return mergedList;
   }
+  // ! linearSearch
   static linearSearch(list, bookingId) {
     let current = list.head;
     while (current) {
@@ -133,6 +148,84 @@ export default class BookingSystemUtils {
     }
     return null;
   }
+
+  // static quicksort(node) {
+  //   if (node === null || node.next === null) {
+  //     return node;
+  //   }
+  //   const pivot = node;
+  //   let smallerHead = null;
+  //   let smallerTail = null;
+  //   let equalHead = null;
+  //   let equalTail = null;
+  //   let greaterHead = null;
+  //   let greaterTail = null;
+  //   let current = node.next;
+  //   while (current !== null) {
+  //     if (current.data.bookingId < pivot.data.bookingId) {
+  //       if (smallerHead === null) {
+  //         smallerHead = current;
+  //         smallerTail = current;
+  //       } else {
+  //         smallerTail.next = current;
+  //         smallerTail = current;
+  //       }
+  //     } else if (current.data.bookingId === pivot.data.bookingId) {
+  //       if (equalHead === null) {
+  //         equalHead = current;
+  //         equalTail = current;
+  //       } else {
+  //         equalTail.next = current;
+  //         equalTail = current;
+  //       }
+  //     } else {
+  //       if (greaterHead === null) {
+  //         greaterHead = current;
+  //         greaterTail = current;
+  //       } else {
+  //         greaterTail.next = current;
+  //         greaterTail = current;
+  //       }
+  //     }
+  //     current = current.next;
+  //   }
+  //   if (smallerTail !== null) {
+  //     smallerTail.next = null;
+  //     smallerHead = quicksort(smallerHead);
+  //     smallerTail = getTail(smallerHead);
+  //   }
+  //   if (greaterTail !== null) {
+  //     greaterTail.next = null;
+  //     greaterHead = quicksort(greaterHead);
+  //   }
+  //   if (smallerHead !== null) {
+  //     pivot.next = smallerHead;
+  //     smallerTail.next = equalHead !== null ? equalHead : greaterHead;
+  //   } else {
+  //     pivot.next = equalHead !== null ? equalHead : greaterHead;
+  //   }
+  //   return pivot;
+  // }
+  // getTail(node) {
+  //   if (node === null) {
+  //     return null;
+  //   }
+  //   let tail = node;
+  //   while (tail.next !== null) {
+  //     tail = tail.next;
+  //   }
+  //   return tail;
+  // }
+  // static linearSearch(list, bookingId) {
+  //   let current = list.head;
+  //   while (current) {
+  //     if (current.data.bookingId === bookingId) {
+  //       return current.data;
+  //     }
+  //     current = current.next;
+  //   }
+  //   return null;
+  // }
   static binarySearch(bookingSystem, targetBookingId) {
     let low = 0;
     let high = bookingSystem.length() - 1;

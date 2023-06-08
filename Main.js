@@ -82,7 +82,7 @@ function MakeItArr(linkedList) {
 
 // *------------------------------------------------------------------
 
-// //!  bubbleSorted
+// // //!  bubbleSorted
 
 // const bubbleSorted = BookingSystemUtils.bubbleSort(hotelBookings);
 // const bookingArr = MakeItArr(bubbleSorted);
@@ -91,12 +91,12 @@ function MakeItArr(linkedList) {
 // pColor("bubble Sort", GREEN);
 // console.log(bookingArr);
 
-//! SelectionSort
-const SelectionSort = BookingSystemUtils.selectionSort(hotelBookings);
-const bookingArr2 = MakeItArr(SelectionSort);
-line();
-pColor("Selection Sort", GREEN);
-console.log(bookingArr2);
+// //! SelectionSort
+// const SelectionSort = BookingSystemUtils.selectionSort(hotelBookings);
+// const bookingArr2 = MakeItArr(SelectionSort);
+// line();
+// pColor("Selection Sort", GREEN);
+// console.log(bookingArr2);
 
 // //! Insertion Sort
 // const InsertionSort = BookingSystemUtils.insertionSort(hotelBookings);
@@ -105,17 +105,29 @@ console.log(bookingArr2);
 // pColor("Insertion Sort", GREEN);
 // console.log(bookingArr3);
 
-// //! Merge Sort
-// const MergeSort = BookingSystemUtils.mergeSort(hotelBookings);
-// const bookingArr4 = MakeItArr(MergeSort);
-// line();
-// pColor("Merge Sort", GREEN);
-// console.log(bookingArr4);
+//! Merge Sort
+const MergeSort = BookingSystemUtils.mergeSort(hotelBookings);
+const bookingArr4 = MakeItArr(MergeSort);
+line();
+pColor("Merge Sort", GREEN);
+console.log(bookingArr4);
 
-//! binary Search
+// //! quick Sort
+// const quickSort = BookingSystemUtils.quicksort(hotelBookings);
+// const bookingArr6 = MakeItArr(quickSort);
+// line();
+// pColor("quic kSort", GREEN);
+// console.log(bookingArr6);
+// //! binary Search
 
 // line();
 // pColor("SEARCH");
 // const search = BookingSystemUtils.binarySearch(bubbleSorted, 1);
 // pColor("binary Search", GREEN);
 // console.log(search);
+
+// line();
+// pColor("SEARCH");
+// const linearSearch_ = BookingSystemUtils.linearSearch(bubbleSorted, 2);
+// pColor("linear Search", GREEN);
+// console.log(linearSearch_);
