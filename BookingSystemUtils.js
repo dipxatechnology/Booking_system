@@ -1,53 +1,6 @@
-"use strict";
-class CustomNode {
-  constructor(data) {
-    this.data = data;
-    this.next = null;
-  }
-}
-class HotelBookingSystem {
-  constructor() {
-    this.head = null;
-  }
-  insertBooking(booking) {
-    const newNode = new CustomNode(booking);
-    if (!this.head) {
-      this.head = newNode;
-      return;
-    }
-    let current = this.head;
-    while (current.next !== null) {
-      current = current.next;
-    }
-    current.next = newNode;
-  }
-  length() {
-    let count = 0;
-    let current = this.head;
-    while (current !== null) {
-      count++;
-      current = current.next;
-    }
-    return count;
-  }
-  getNodeAtIndex(index) {
-    if (index < 0 || index >= this.length()) {
-      return null;
-    }
-    let count = 0;
-    let current = this.head;
-    while (count < index) {
-      if (current === null) {
-        // Handle the case where 'current' is null before reaching the desired index
-        return null;
-      }
-      current = current.next;
-      count++;
-    }
-    return current;
-  }
-}
-class BookingSystemUtils {
+import { CustomNode, HotelBookingSystem } from "./HotelBookingSystem.js";
+
+export default class BookingSystemUtils {
   static selectionSort(list) {
     if (!list.head) {
       return new HotelBookingSystem();
@@ -180,65 +133,20 @@ class BookingSystemUtils {
     }
     return null;
   }
-  static binarySearch(list, bookingId) {
-    let left = 0;
-    let right = list.length() - 1;
-    while (left <= right) {
-      const mid = Math.floor((left + right) / 2);
-      const midNode = list.getNodeAtIndex(mid);
-      if (midNode.data.bookingId === bookingId) {
+  static binarySearch(bookingSystem, targetBookingId) {
+    let low = 0;
+    let high = bookingSystem.length() - 1;
+    while (low <= high) {
+      const mid = Math.floor((low + high) / 2);
+      const midNode = bookingSystem.getNodeAtIndex(mid);
+      if (midNode && midNode.data.bookingId === targetBookingId) {
         return midNode.data;
-      } else if (midNode.data.bookingId < bookingId) {
-        left = mid + 1;
+      } else if (midNode && midNode.data.bookingId < targetBookingId) {
+        low = mid + 1;
       } else {
-        right = mid - 1;
+        high = mid - 1;
       }
     }
     return null;
   }
 }
-// Example usage:
-const hotelBookings = new HotelBookingSystem();
-hotelBookings.insertBooking({
-  bookingId: 10,
-  checkInDate: "2023-06-10",
-  name: "Michael Johnson",
-  phoneNumber: "4567891230",
-});
-hotelBookings.insertBooking({
-  bookingId: 1,
-  checkInDate: "2023-06-01",
-  name: "John Doe",
-  phoneNumber: "1234567890",
-});
-hotelBookings.insertBooking({
-  bookingId: 3,
-  checkInDate: "2023-06-05",
-  name: "Jane Smith",
-  phoneNumber: "0987654321",
-});
-hotelBookings.insertBooking({
-  bookingId: 2,
-  checkInDate: "2023-06-03",
-  name: "Alice Johnson",
-  phoneNumber: "5555555555",
-});
-
-function linkedListToArray(linkedList) {
-  const array = [];
-  let current = linkedList.head;
-
-  while (current) {
-    array.push(current.data);
-    current = current.next;
-  }
-
-  return array;
-}
-
-console.log(hotelBookings.length()); // Output: 3
-const makeArray = linkedListToArray(hotelBookings);
-console.log("NOT SORTED ", makeArray);
-const sortedBookings = BookingSystemUtils.bubbleSort(hotelBookings);
-const sortedArray = linkedListToArray(sortedBookings);
-console.log("SORTED ", sortedArray);
