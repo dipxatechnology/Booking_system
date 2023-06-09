@@ -50,84 +50,82 @@ function MakeItArr(linkedList) {
 
   return array;
 }
-// line();
-// pColor("Performance");
-// pColor("the Performance may vary from machine to machine", BRIGHT_BLUE, false);
-// calculatePerformance(
-//   hotelBookings,
-//   BookingSystemUtils.bubbleSort,
-//   "Bubble Sort"
-// );
-// calculatePerformance(
-//   hotelBookings,
-//   BookingSystemUtils.selectionSort,
-//   "Selection Sort"
-// );
-// calculatePerformance(
-//   hotelBookings,
-//   BookingSystemUtils.insertionSort,
-//   "Insertion Sort"
-// );
-// calculatePerformance(hotelBookings, BookingSystemUtils.mergeSort, "Merge Sort");
-// calculatePerformance(
-//   hotelBookings,
-//   (list) => BookingSystemUtils.linearSearch(list, 1),
-//   "Linear Search"
-// );
-// calculatePerformance(
-//   hotelBookings,
-//   (list) => BookingSystemUtils.binarySearch(list, 1),
-//   "Binary Search"
-// );
 
-// *------------------------------------------------------------------
+const notSorted  = MakeItArr(hotelBookings);
+pColor("Not Sorted", RED);
+console.log(notSorted);
 
 // // //!  bubbleSorted
 
-// const bubbleSorted = BookingSystemUtils.bubbleSort(hotelBookings);
-// const bookingArr = MakeItArr(bubbleSorted);
-// line();
-// pColor("SORTED ARRAY:");
-// pColor("bubble Sort", GREEN);
-// console.log(bookingArr);
+const bubbleSorted = BookingSystemUtils.bubbleSort(hotelBookings);
+const bookingArr = MakeItArr(bubbleSorted);
+line();
+pColor("SORTED ARRAY:");
+pColor("bubble Sort", GREEN);
+console.log(bookingArr);
 
 // //! SelectionSort
-// const SelectionSort = BookingSystemUtils.selectionSort(hotelBookings);
-// const bookingArr2 = MakeItArr(SelectionSort);
-// line();
-// pColor("Selection Sort", GREEN);
-// console.log(bookingArr2);
+const SelectionSort = BookingSystemUtils.selectionSort(hotelBookings);
+const bookingArr2 = MakeItArr(SelectionSort);
+line();
+pColor("Selection Sort", GREEN);
+console.log(bookingArr2);
 
 // //! Insertion Sort
-// const InsertionSort = BookingSystemUtils.insertionSort(hotelBookings);
-// const bookingArr3 = MakeItArr(InsertionSort);
-// line();
-// pColor("Insertion Sort", GREEN);
-// console.log(bookingArr3);
+const InsertionSort = BookingSystemUtils.insertionSort(hotelBookings);
+const bookingArr3 = MakeItArr(InsertionSort);
+line();
+pColor("Insertion Sort", GREEN);
+console.log(bookingArr3);
 
-//! Merge Sort
+//! Merge Sort //doesnt work for now
 const MergeSort = BookingSystemUtils.mergeSort(hotelBookings);
 const bookingArr4 = MakeItArr(MergeSort);
 line();
 pColor("Merge Sort", GREEN);
 console.log(bookingArr4);
 
-// //! quick Sort
-// const quickSort = BookingSystemUtils.quicksort(hotelBookings);
-// const bookingArr6 = MakeItArr(quickSort);
-// line();
-// pColor("quic kSort", GREEN);
-// console.log(bookingArr6);
 // //! binary Search
+line();
+pColor("SEARCH");
+const search = BookingSystemUtils.binarySearch(bubbleSorted, 1);
+pColor("binary Search", GREEN);
+console.log(search);
 
-// line();
-// pColor("SEARCH");
-// const search = BookingSystemUtils.binarySearch(bubbleSorted, 1);
-// pColor("binary Search", GREEN);
-// console.log(search);
+// //! linear search
+line();
+pColor("SEARCH");
+const linearSearch_ = BookingSystemUtils.linearSearch(bubbleSorted, 2);
+pColor("linear Search", GREEN);
+console.log(linearSearch_);
 
-// line();
-// pColor("SEARCH");
-// const linearSearch_ = BookingSystemUtils.linearSearch(bubbleSorted, 2);
-// pColor("linear Search", GREEN);
-// console.log(linearSearch_);
+// //!performace 
+line();
+pColor("Performance");
+pColor("the Performance may vary from machine to machine", BRIGHT_BLUE, false);
+calculatePerformance(
+  hotelBookings,
+  BookingSystemUtils.bubbleSort,
+  "Bubble Sort"
+);
+calculatePerformance(
+  hotelBookings,
+  BookingSystemUtils.selectionSort,
+  "Selection Sort"
+);
+calculatePerformance(
+  hotelBookings,
+  BookingSystemUtils.insertionSort,
+  "Insertion Sort"
+);
+// calculatePerformance(hotelBookings, BookingSystemUtils.mergeSort, "Merge Sort"); 
+calculatePerformance(
+  hotelBookings,
+  (list) => BookingSystemUtils.linearSearch(list, 1),
+  "Linear Search"
+);
+calculatePerformance(
+  hotelBookings,
+  (list) => BookingSystemUtils.binarySearch(list, 1),
+  "Binary Search"
+);
