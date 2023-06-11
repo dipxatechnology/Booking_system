@@ -110,29 +110,38 @@ export default class BookingSystemUtils {
     if (!list || !list.next) {
       return list;
     }
+  
     const mid = this.getMiddle(list);
     const leftHead = list;
     const rightHead = mid.next;
     mid.next = null;
+  
     const sortedLeft = this.mergeSort(leftHead);
     const sortedRight = this.mergeSort(rightHead);
+  
     return this.merge(sortedLeft, sortedRight);
   }
   
   static getMiddle(head) {
     let slow = head;
     let fast = head;
+    let prev = null;
+  
     while (fast && fast.next && fast.next.next) {
+      prev = slow;
       slow = slow.next;
       fast = fast.next.next;
     }
-    return slow;
+  
+    return prev ? prev : slow;
   }
+  
   static merge(left, right) {
     const dummyNode = new CustomNode(null);
     let current = dummyNode;
-    let leftPtr = left.head;
-    let rightPtr = right.head;
+    let leftPtr = left;
+    let rightPtr = right;
+  
     while (leftPtr && rightPtr) {
       if (leftPtr.data.checkInDate <= rightPtr.data.checkInDate) {
         current.next = leftPtr;
@@ -143,16 +152,19 @@ export default class BookingSystemUtils {
       }
       current = current.next;
     }
+  
     if (leftPtr) {
       current.next = leftPtr;
     } else if (rightPtr) {
       current.next = rightPtr;
     }
+  
     const mergedList = new HotelBookingSystem();
     mergedList.head = dummyNode.next; // Set the head of the merged list
+  
     return mergedList;
   }
-  
+
   // ! linearSearch
   static linearSearch(list, bookingId) {
     let current = list.head;

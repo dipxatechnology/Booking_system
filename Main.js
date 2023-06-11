@@ -91,6 +91,13 @@ function MakeItArr(linkedList) {
   return array;
 }
 
+function getUserChoice() {
+  return new Promise((resolve) => {
+    const userInput = prompt('Enter your choice: ');
+    resolve(userInput.trim());
+  });
+}
+
 async function start() {
   displayMenu();
 
@@ -207,13 +214,6 @@ async function start() {
     default:
       console.log("Invalid choice");
   }
-}
-
-function getUserChoice() {
-  return new Promise((resolve) => {
-    const userInput = prompt('Enter your choice: ');
-    resolve(userInput.trim());
-  });
 }
 
 start();
