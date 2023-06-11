@@ -90,20 +90,35 @@ export default class BookingSystemUtils {
   }
   // ! mergeSort
 
+  // static mergeSort(list) {
+  //   if (!list.head || !list.head.next) {
+  //     return list;
+  //   }
+  //   const mid = this.getMiddle(list.head);
+  //   const leftHead = list.head;
+  //   const rightHead = mid.next;
+  //   mid.next = null;
+  //   const sortedLeft = this.mergeSort(new HotelBookingSystem());
+  //   sortedLeft.head = leftHead;
+  //   const sortedRight = this.mergeSort(new HotelBookingSystem());
+  //   sortedRight.head = rightHead;
+  //   return this.merge(sortedLeft, sortedRight);
+  // }
+
+  //!mergeSort v2
   static mergeSort(list) {
-    if (!list.head || !list.head.next) {
+    if (!list || !list.next) {
       return list;
     }
-    const mid = this.getMiddle(list.head);
-    const leftHead = list.head;
+    const mid = this.getMiddle(list);
+    const leftHead = list;
     const rightHead = mid.next;
     mid.next = null;
-    const sortedLeft = this.mergeSort(new HotelBookingSystem());
-    sortedLeft.head = leftHead;
-    const sortedRight = this.mergeSort(new HotelBookingSystem());
-    sortedRight.head = rightHead;
+    const sortedLeft = this.mergeSort(leftHead);
+    const sortedRight = this.mergeSort(rightHead);
     return this.merge(sortedLeft, sortedRight);
   }
+  
   static getMiddle(head) {
     let slow = head;
     let fast = head;

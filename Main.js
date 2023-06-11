@@ -20,18 +20,21 @@ hotelBookings.insertBooking({
   name: "Sakib",
   phoneNumber: "4567891230",
 });
+
 hotelBookings.insertBooking({
   bookingId: 1,
   checkInDate: "2023-06-01",
   name: "Wong",
   phoneNumber: "1234567890",
 });
+
 hotelBookings.insertBooking({
   bookingId: 3,
   checkInDate: "2023-06-05",
   name: "Andra",
   phoneNumber: "0987654321",
 });
+
 hotelBookings.insertBooking({
   bookingId: 2,
   checkInDate: "2023-06-03",
@@ -103,27 +106,37 @@ console.log(linearSearch_);
 line();
 pColor("Performance");
 pColor("the Performance may vary from machine to machine", BRIGHT_BLUE, false);
+
 calculatePerformance(
   hotelBookings,
   BookingSystemUtils.bubbleSort,
   "Bubble Sort"
 );
+
 calculatePerformance(
   hotelBookings,
   BookingSystemUtils.selectionSort,
   "Selection Sort"
 );
+
 calculatePerformance(
   hotelBookings,
   BookingSystemUtils.insertionSort,
   "Insertion Sort"
 );
-// calculatePerformance(hotelBookings, BookingSystemUtils.mergeSort, "Merge Sort"); 
+
+calculatePerformance(
+  hotelBookings,
+   BookingSystemUtils.mergeSort,
+  "Merge Sort"
+); 
+
 calculatePerformance(
   hotelBookings,
   (list) => BookingSystemUtils.linearSearch(list, 1),
   "Linear Search"
 );
+
 calculatePerformance(
   hotelBookings,
   (list) => BookingSystemUtils.binarySearch(list, 1),
