@@ -8,6 +8,20 @@ export class HotelBookingSystem {
   constructor() {
     this.head = null;
   }
+
+  findBookingById(bookingId) {
+    let current = this.head;
+
+    while (current !== null) {
+      if (current.data.bookingId === bookingId) {
+        return current.data;
+      }
+      current = current.next;
+    }
+
+    return null; // Booking not found
+  }
+
   insertBooking(booking) {
     const newNode = new CustomNode(booking);
     if (!this.head) {
@@ -20,6 +34,7 @@ export class HotelBookingSystem {
     }
     current.next = newNode;
   }
+  
   length() {
     let count = 0;
     let current = this.head;
@@ -29,6 +44,7 @@ export class HotelBookingSystem {
     }
     return count;
   }
+
   getNodeAtIndex(index) {
     if (index < 0 || index >= this.length()) {
       return null;

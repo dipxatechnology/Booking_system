@@ -40,7 +40,7 @@ export default class BookingSystemUtils {
       let nextNode = current.next;
       if (
         !sortedList.head ||
-        sortedList.head.data.checkInDate >= current.data.checkInDate
+        sortedList.head.data.bookingId >= current.data.bookingId
       ) {
         current.next = sortedList.head;
         sortedList.head = current;
@@ -48,7 +48,7 @@ export default class BookingSystemUtils {
         let temp = sortedList.head;
         while (
           temp.next &&
-          temp.next.data.checkInDate < current.data.checkInDate
+          temp.next.data.bookingId < current.data.bookingId
         ) {
           temp = temp.next;
         }
@@ -77,7 +77,7 @@ export default class BookingSystemUtils {
       swapped = false;
       current = sortedList.head;
       while (current && current.next) {
-        if (current.data.checkInDate > current.next.data.checkInDate) {
+        if (current.data.bookingId > current.next.data.bookingId) {
           let temp = current.data;
           current.data = current.next.data;
           current.next.data = temp;
@@ -152,6 +152,7 @@ export default class BookingSystemUtils {
     mergedList.head = dummyNode.next; // Set the head of the merged list
     return mergedList;
   }
+  
   // ! linearSearch
   static linearSearch(list, bookingId) {
     let current = list.head;
