@@ -241,8 +241,7 @@ async function start() {
         line();
         console.log(RESET);
         break;
-        case '9' :
-          case "9":
+        case "9":
         line();
         pColor("Memory Uses");
         pColor(
