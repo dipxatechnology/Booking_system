@@ -13,7 +13,7 @@ import {
   clearTerminal,
 } from "./ConsoleUtils.js";
 import { HotelBookingSystem } from "./HotelBookingSystem.js";
-import { calculatePerformance } from "./calculatePerformance.js";
+import { calculatePerformance, calculateSpace } from "./calculatePerformance.js";
 import { displayMenu } from "./TableUI.js";
 
 // Example usage:
@@ -241,6 +241,48 @@ async function start() {
         line();
         console.log(RESET);
         break;
+        case '9' :
+          case "9":
+        line();
+        pColor("Memory Uses");
+        pColor(
+          "the Memory Uses may vary from machine to machine",
+          BRIGHT_BLUE,
+          false
+        );
+        calculateSpace(
+          hotelBookings,
+          BookingSystemUtils.bubbleSort,
+          "Bubble Sort"
+        );
+
+        calculateSpace(
+          hotelBookings,
+          BookingSystemUtils.selectionSort,
+          "Selection Sort"
+        );
+
+        calculateSpace(
+          hotelBookings,
+          BookingSystemUtils.insertionSort,
+          "Insertion Sort"
+        );
+
+        calculateSpace(hotelBookings, BookingSystemUtils.mergeSort, "Merge Sort");
+
+        calculateSpace(
+          hotelBookings,
+          (list) => BookingSystemUtils.linearSearch(list, 1),
+          "Linear Search"
+        );
+
+        calculateSpace(
+          hotelBookings,
+          (list) => BookingSystemUtils.binarySearch(list, 1),
+          "Binary Search"
+        );
+        line();
+        console.log(RESET);
       default:
         console.log("Invalid choice");
     }

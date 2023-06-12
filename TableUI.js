@@ -22,6 +22,7 @@ export function displayMenu() {
   console.log("6. Binary Search");
   console.log("7. Linear Search");
   console.log("8. Performance");
+  console.log('9 Memory Usage');
 
   line();
 }

@@ -20,3 +20,24 @@ export function calculatePerformance(list, sortingMethod, methodName) {
 
   return result;
 }
+
+export function calculateSpace(list, sortingMethod, methodName) {
+  const memoryUsage = process.memoryUsage().heapUsed;
+  const sorted = sortingMethod(list);
+  const totalMemoryUsage = process.memoryUsage().heapUsed;
+  const spaceUsed = totalMemoryUsage - memoryUsage;
+  console.log(
+    BOLD +
+      GREEN +
+      methodName +
+      RESET +
+      " used " +
+      BOLD +
+      RED +
+      spaceUsed +
+      RESET +
+      " bytes of memory.\n"
+  );
+
+  return sorted;
+}
