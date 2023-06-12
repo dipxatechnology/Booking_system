@@ -268,7 +268,11 @@ async function start() {
           "Insertion Sort"
         );
 
-        calculateSpace(hotelBookings, BookingSystemUtils.mergeSort, "Merge Sort");
+        calculateSpace(
+          hotelBookings,
+          BookingSystemUtils.mergeSort,
+          "Merge Sort"
+        );
 
         calculateSpace(
           hotelBookings,
