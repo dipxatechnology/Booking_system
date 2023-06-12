@@ -286,9 +286,10 @@ async function start() {
         );
         line();
         console.log(RESET);
+        break;
       default:
         console.log("Invalid choice");
-    }
   }
+}
 
 start();
