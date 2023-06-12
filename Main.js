@@ -1,7 +1,7 @@
 "use strict";
 
 import BookingSystemUtils from "./BookingSystemUtils.js";
-import promptSync from 'prompt-sync';
+import promptSync from "prompt-sync";
 import {
   RED,
   GREEN,
@@ -22,16 +22,16 @@ const hotelBookings = new HotelBookingSystem();
 
 function addBooking() {
   line();
-  pColor("user inputs", GREEN)
-  console.log(RESET)
-  const bookingIdInput = prompt('Enter the booking ID (enter 0 to exit): ');
+  pColor("user inputs", GREEN);
+  console.log(RESET);
+  const bookingIdInput = prompt("Enter the booking ID (enter 0 to exit): ");
   const bookingId = parseInt(bookingIdInput);
 
   if (bookingId === 0) {
     return; // Exit the function, allowing the program to continue
   }
 
-  const checkInDate = prompt('Enter the check-in date: ');
+  const checkInDate = prompt("Enter the check-in date: ");
   const name = prompt("Enter the guest's name: ");
   const phoneNumber = prompt("Enter the guest's phone number: ");
 
@@ -50,7 +50,7 @@ line();
 console.log(RESET);
 clearTerminal();
 
-// !hardcoded input 
+// !hardcoded input
 // hotelBookings.insertBooking({
 //   bookingId: 10,
 //   checkInDate: "2023-06-10",
@@ -93,144 +93,147 @@ function MakeItArr(linkedList) {
 
 function getUserChoice() {
   return new Promise((resolve) => {
-    const userInput = prompt('Enter your choice: ');
+    const userInput = prompt("Enter your choice: ");
     resolve(userInput.trim());
   });
 }
 
 async function start() {
-  displayMenu();
+  globalThis.run = true;
+  while (run) {
+    displayMenu();
+    const notSorted = MakeItArr(hotelBookings);
+    const bubbleSorted = BookingSystemUtils.bubbleSort(hotelBookings);
+    const SelectionSort = BookingSystemUtils.selectionSort(hotelBookings);
+    const InsertionSort = BookingSystemUtils.insertionSort(hotelBookings);
+    const MergeSort = BookingSystemUtils.mergeSort(hotelBookings);
 
-  const bubbleSorted = BookingSystemUtils.bubbleSort(hotelBookings);
-  const SelectionSort = BookingSystemUtils.selectionSort(hotelBookings);
-  const InsertionSort = BookingSystemUtils.insertionSort(hotelBookings);
-  const MergeSort = BookingSystemUtils.mergeSort(hotelBookings);
+    const choice = await getUserChoice();
+    console.log(`Selected choice: ${choice}`);
 
-  const choice = await getUserChoice();
-  console.log(`Selected choice: ${choice}`);
+    // Handle the choice based on the selected option
+    switch (choice) {
+      case "0":
+        run = false;
+      case "1":
+        // Handle "Not Sorted" option
+        // ! not Sorted
 
-  // Handle the choice based on the selected option
-  switch (choice) {
-    case '1':
-      // Handle "Not Sorted" option
-      // ! not Sorted
-      const notSorted  = MakeItArr(hotelBookings);
-      pColor("Not Sorted", RED);
-      console.log(notSorted);
-      break;
-    case '2':
-      // Handle "Bubble Sort" option
-      // !  bubbleSorted
-      const bookingArr = MakeItArr(bubbleSorted);
-      line();
-      pColor("SORTED ARRAY:");
-      pColor("bubble Sort", GREEN);
-      console.log(bookingArr);
-      break;
-    case '3':
-      // Handle "Selection Sort" option
-      // ! SelectionSort
-      const bookingArr2 = MakeItArr(SelectionSort);
-      line();
-      pColor("Selection Sort", GREEN);
-      console.log(bookingArr2);
-      break;
-    case '4':
-      // Handle "Insertion Sort" option
-      //! Insertion Sort
-      const bookingArr3 = MakeItArr(InsertionSort);
-      line();
-      pColor("Insertion Sort", GREEN);
-      console.log(bookingArr3);
-      break;
-    case '5':
-      // Handle "Merge Sort" option
-      //! Merge Sort 
-      const bookingArr4 = MakeItArr(MergeSort);
-      line();
-      pColor("Merge Sort", GREEN);
-      console.log(bookingArr4);
-      break;
-    case '6':
-      // Handle "Binary Search" option
-      // ! binary Search
-      line();
-      pColor("SEARCH");
-      const search = BookingSystemUtils.binarySearch(bubbleSorted, 1);
-      pColor("binary Search", GREEN);
-      console.log(search);
-      break;
-    case '7':
-      // Handle "Linear Search" option
-      // ! linear search
-      line();
-      pColor("SEARCH");
-      const linearSearch_ = BookingSystemUtils.linearSearch(bubbleSorted, 1);
-      pColor("linear Search", GREEN);
-      console.log(linearSearch_);
-      break;
-    case '8':
-      // Handle "Performance" option
-      // ! performance 
-      line();
-      pColor("Performance");
-      pColor("the Performance may vary from machine to machine", BRIGHT_BLUE, false);
-      calculatePerformance(
-        hotelBookings,
-        BookingSystemUtils.bubbleSort,
-        "Bubble Sort"
-      );
+        pColor("Not Sorted", RED);
+        console.log(notSorted);
+        break;
+      case "2":
+        // Handle "Bubble Sort" option
+        // !  bubbleSorted
+        const bookingArr = MakeItArr(bubbleSorted);
+        line();
+        pColor("SORTED ARRAY:");
+        pColor("bubble Sort", GREEN);
+        console.log(bookingArr);
+        break;
+      case "3":
+        // Handle "Selection Sort" option
+        // ! SelectionSort
+        const bookingArr2 = MakeItArr(SelectionSort);
+        line();
+        pColor("Selection Sort", GREEN);
+        console.log(bookingArr2);
+        break;
+      case "4":
+        // Handle "Insertion Sort" option
+        //! Insertion Sort
+        const bookingArr3 = MakeItArr(InsertionSort);
+        line();
+        pColor("Insertion Sort", GREEN);
+        console.log(bookingArr3);
+        break;
+      case "5":
+        // Handle "Merge Sort" option
+        //! Merge Sort
+        const bookingArr4 = MakeItArr(MergeSort);
+        line();
+        pColor("Merge Sort", GREEN);
+        console.log(bookingArr4);
+        break;
+      case "6":
+        // Handle "Binary Search" option
+        // ! binary Search
+        line();
+        pColor("SEARCH");
+        const searchStr = prompt("Enter the ID you want to search for:");
+        const searchId = parseInt(searchStr);
 
-      calculatePerformance(
-        hotelBookings,
-        BookingSystemUtils.selectionSort,
-        "Selection Sort"
-      );
+        const search = BookingSystemUtils.binarySearch(bubbleSorted, searchId);
+        pColor("binary Search", GREEN);
+        console.log(search);
 
-      calculatePerformance(
-        hotelBookings,
-        BookingSystemUtils.insertionSort,
-        "Insertion Sort"
-      );
+        break;
+      case "7":
+        // Handle "Linear Search" option
+        // ! linear search
+        line();
+        pColor("SEARCH");
+        const linearSearchStr = prompt("Enter your choice: ");
+        const linearSearchId = parseInt(linearSearchStr);
 
-      calculatePerformance(
-        hotelBookings,
-         BookingSystemUtils.mergeSort,
-        "Merge Sort"
-      ); 
+        const linearSearch_ = BookingSystemUtils.linearSearch(
+          bubbleSorted,
+          linearSearchId
+        );
+        pColor("linear Search", GREEN);
 
-      calculatePerformance(
-        hotelBookings,
-        (list) => BookingSystemUtils.linearSearch(list, 1),
-        "Linear Search"
-      );
+        console.log(linearSearch_);
+        break;
+      case "8":
+        // Handle "Performance" option
+        // ! performance
+        line();
+        pColor("Performance");
+        pColor(
+          "the Performance may vary from machine to machine",
+          BRIGHT_BLUE,
+          false
+        );
+        calculatePerformance(
+          hotelBookings,
+          BookingSystemUtils.bubbleSort,
+          "Bubble Sort"
+        );
 
-      calculatePerformance(
-        hotelBookings,
-        (list) => BookingSystemUtils.binarySearch(list, 1),
-        "Binary Search"
-      );
-      break;
-    default:
-      console.log("Invalid choice");
+        calculatePerformance(
+          hotelBookings,
+          BookingSystemUtils.selectionSort,
+          "Selection Sort"
+        );
+
+        calculatePerformance(
+          hotelBookings,
+          BookingSystemUtils.insertionSort,
+          "Insertion Sort"
+        );
+
+        calculatePerformance(
+          hotelBookings,
+          BookingSystemUtils.mergeSort,
+          "Merge Sort"
+        );
+
+        calculatePerformance(
+          hotelBookings,
+          (list) => BookingSystemUtils.linearSearch(list, 1),
+          "Linear Search"
+        );
+
+        calculatePerformance(
+          hotelBookings,
+          (list) => BookingSystemUtils.binarySearch(list, 1),
+          "Binary Search"
+        );
+        break;
+      default:
+        console.log("Invalid choice");
+    }
   }
 }
 
 start();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
