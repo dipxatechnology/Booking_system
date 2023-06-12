@@ -99,8 +99,6 @@ function getUserChoice() {
 }
 
 async function start() {
-  globalThis.run = true;
-  while (run) {
     displayMenu();
     const notSorted = MakeItArr(hotelBookings);
     const bubbleSorted = BookingSystemUtils.bubbleSort(hotelBookings);
@@ -113,14 +111,14 @@ async function start() {
 
     // Handle the choice based on the selected option
     switch (choice) {
-      case "0":
-        run = false;
       case "1":
         // Handle "Not Sorted" option
         // ! not Sorted
 
         pColor("Not Sorted", RED);
         console.log(notSorted);
+        line();
+        console.log(RESET);
         break;
       case "2":
         // Handle "Bubble Sort" option
@@ -130,6 +128,8 @@ async function start() {
         pColor("SORTED ARRAY:");
         pColor("bubble Sort", GREEN);
         console.log(bookingArr);
+        line();
+        console.log(RESET);
         break;
       case "3":
         // Handle "Selection Sort" option
@@ -138,6 +138,8 @@ async function start() {
         line();
         pColor("Selection Sort", GREEN);
         console.log(bookingArr2);
+        line();
+        console.log(RESET);
         break;
       case "4":
         // Handle "Insertion Sort" option
@@ -146,6 +148,8 @@ async function start() {
         line();
         pColor("Insertion Sort", GREEN);
         console.log(bookingArr3);
+        line();
+        console.log(RESET);
         break;
       case "5":
         // Handle "Merge Sort" option
@@ -154,26 +158,29 @@ async function start() {
         line();
         pColor("Merge Sort", GREEN);
         console.log(bookingArr4);
+        line();
+        console.log(RESET);
         break;
       case "6":
         // Handle "Binary Search" option
         // ! binary Search
         line();
         pColor("SEARCH");
-        const searchStr = prompt("Enter the ID you want to search for:");
+        const searchStr = prompt("Enter the ID you want to search for (based on bubble):");
         const searchId = parseInt(searchStr);
 
         const search = BookingSystemUtils.binarySearch(bubbleSorted, searchId);
         pColor("binary Search", GREEN);
         console.log(search);
-
+        line();
+        console.log(RESET);
         break;
       case "7":
         // Handle "Linear Search" option
         // ! linear search
         line();
         pColor("SEARCH");
-        const linearSearchStr = prompt("Enter your choice: ");
+        const linearSearchStr = prompt("Enter the ID you want to search for (based on bubble): ");
         const linearSearchId = parseInt(linearSearchStr);
 
         const linearSearch_ = BookingSystemUtils.linearSearch(
@@ -183,6 +190,8 @@ async function start() {
         pColor("linear Search", GREEN);
 
         console.log(linearSearch_);
+        line();
+        console.log(RESET);
         break;
       case "8":
         // Handle "Performance" option
@@ -229,11 +238,12 @@ async function start() {
           (list) => BookingSystemUtils.binarySearch(list, 1),
           "Binary Search"
         );
+        line();
+        console.log(RESET);
         break;
       default:
         console.log("Invalid choice");
     }
   }
-}
 
 start();

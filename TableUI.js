@@ -14,7 +14,6 @@ export function displayMenu() {
   pColor("Menu Options", BRIGHT_BLUE, true);
   console.log(RESET);
 
-  console.log("0. Exit");
   console.log("1. Not Sorted");
   console.log("2. Bubble Sort");
   console.log("3. Selection Sort");
